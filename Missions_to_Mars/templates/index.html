@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Data</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: grey;">
+  <div clas="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+      
+    <div class="row">
+      <div class="col-md-12 col-md-offset-1">
+        <h3>Latest Mars News</h3>
+        <h4>{{mars_data.news_title}}</h4>
+        <p>{{mars_data.news_p}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-1">
+        <h3>Featured Mars Image</h3>
+        <img src={{mars_data.featured_image_url}} alt="NASA Mars featured photo" width="85%">
+      </div>
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body">
+          </div>
+        </div>
+        <div>   
+                     
+          {{mars_data.facts_table | safe}}
+        </div>
+      </div>
+    </div>
+    
+    <h3 style="padding-top: 25px; margin-top: 25px; text-align: center;">Mars Hemispheres</h3>
+    <div class="row">
+        <hr>
+        <div class="col-md-12">
+            <div class="row">
+                {% for image in mars_data.hemisphere_image_urls %}
+                <div class="col-md-3">
+                    <div class="card text-white bg-dark" style="margin: 30px; border: 2px solid rgb(70, 70, 70); padding: 5px; border-radius: 6px;">
+                      <img class="card-img-top img-responsive img-rounded" src="{{ image.img_url }}" />
+                        <div class="card-body">
+                            <p class="card-text" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; color: rgb(34, 34, 34);">{{ image.img_title }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>    
+  </div>
+</body>
+</html>
